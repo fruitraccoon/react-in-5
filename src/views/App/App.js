@@ -31,7 +31,7 @@ class App extends Component {
   render() {
     const { stepNo } = this.state;
     return (
-      <div className="app-component">
+      <div className="app-component" style={{ width: '80vw' }}>
         <Step slideshow={slideshow} stepNo={stepNo} />
       </div>
     );

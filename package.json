@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "diff": "^3.3.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.11",
@@ -10,7 +11,7 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
-      "prettier --single-quote --write --jsx-bracket-same-line --print-width 120 --trailing-comma es5",
+      "prettier --single-quote --write --jsx-bracket-same-line --print-width 100 --trailing-comma es5",
       "git add"
     ]
   },

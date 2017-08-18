@@ -4,7 +4,7 @@ import Step03 from './03MultiChildren';
 import Step04 from './04MixedChildren';
 import Step05 from './05ChildComponent';
 
-const steps = [Step01, Step02, Step03, Step04, Step05];
+const steps = [Step01, Step02, Step01, Step03, Step04, Step05];
 
 export default {
   steps,
