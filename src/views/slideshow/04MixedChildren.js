@@ -7,6 +7,7 @@ const HelloWorld = () =>
     world!
   </p>;
 
+HelloWorld.title = 'Mixed Child Components';
 HelloWorld.source = `const HelloWorld = () => (
   <p id="demo-title">
     <span>Hello</span>

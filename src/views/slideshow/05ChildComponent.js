@@ -9,6 +9,7 @@ const HelloWorld = () =>
     world!
   </p>;
 
+HelloWorld.title = 'Refactor New Component';
 HelloWorld.source = `const Greeting = () => (
   <span>Hello</span>
 )

@@ -93,6 +93,9 @@ class Step extends React.Component {
     }, []);
     return (
       <div>
+        <h1>
+          {Step.title}
+        </h1>
         <ExampleCode stepNo={stepNo} items={items} />
         <Step />
       </div>

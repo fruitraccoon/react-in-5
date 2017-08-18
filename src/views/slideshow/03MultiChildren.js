@@ -7,6 +7,7 @@ const HelloWorld = () =>
     <span>world!</span>
   </p>;
 
+HelloWorld.title = 'Mutiple Child Components';
 HelloWorld.source = `const HelloWorld = () => (
   <p id="demo-title">
     <span>Hello</span>
