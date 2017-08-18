@@ -1,3 +1,4 @@
+import 'typeface-fira-sans';
 import './index.css';
 
 import React from 'react';
