@@ -9,13 +9,13 @@ const HelloWorld = () =>
     world!
   </p>;
 
-HelloWorld.title = 'Refactor New Component';
+HelloWorld.title = 'Refactor out a new Component';
 HelloWorld.source = `const Greeting = () => (
   <span>Hello</span>
 )
 
 const HelloWorld = () => (
-  <p id="demo-title">
+  <p id="demo">
     <Greeting />
     <span>, </span>
     world!

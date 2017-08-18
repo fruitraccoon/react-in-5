@@ -7,9 +7,9 @@ const HelloWorld = () =>
     world!
   </p>;
 
-HelloWorld.title = 'Mixed Child Components';
+HelloWorld.title = 'Mixed Types of Children';
 HelloWorld.source = `const HelloWorld = () => (
-  <p id="demo-title">
+  <p id="demo">
     <span>Hello</span>
     <span>, </span>
     world!

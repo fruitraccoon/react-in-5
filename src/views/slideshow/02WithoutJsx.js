@@ -4,7 +4,7 @@ const HelloWorld = () => React.createElement('p', { id: 'demo-title' }, ['Hello,
 
 HelloWorld.title = 'Without JSX';
 HelloWorld.source = `const HelloWorld = () => (
-  React.createElement('p', { id: 'demo-title' }, [ 'Hello, world!' ])
+  React.createElement('p', { id: 'demo' }, [ 'Hello, world!' ])
 )`;
 
 export default HelloWorld;

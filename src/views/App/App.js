@@ -31,8 +31,18 @@ class App extends Component {
   render() {
     const { stepNo } = this.state;
     return (
-      <div className="app-component" style={{ width: '80vw' }}>
-        <Step slideshow={slideshow} stepNo={stepNo} />
+      <div
+        className="app-component"
+        style={{
+          position: 'fixed',
+          width: '100%',
+          height: '100%',
+          background: 'linear-gradient(lightgrey, whitesmoke)',
+          textAlign: 'center',
+        }}>
+        <div style={{ padding: '0 5vw' }}>
+          <Step slideshow={slideshow} stepNo={stepNo} />
+        </div>
       </div>
     );
   }
