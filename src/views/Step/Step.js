@@ -1,5 +1,6 @@
 import React from 'react';
 import { diffLines } from 'diff';
+import { easeExpOut, easeExpInOut } from 'd3-ease';
 import NodeGroup from 'resonance/NodeGroup';
 import Surface from './Surface';
 
@@ -9,52 +10,49 @@ const ExampleCode = ({ stepNo, items }) =>
       data={items}
       keyAccessor={d => d.key}
       start={(d, i) => ({
-        textAttributes: {
-          y: `${d.initLine * 1.2}em`,
-          opacity: d.diff.added ? 0 : 1,
-        },
+        opacity: d.diff.added ? 0 : 1,
+        y: `${d.initLine * 1.2}em`,
+        transform: `translate(${d.diff.added ? 1000 : 0})`,
       })}
       enter={(d, i) => [
         {
-          textAttributes: {
-            y: [`${d.compLine * 1.2}em`],
-            opacity: d.diff.removed ? [0] : [1],
-          },
-          timing: { duration: 1000 },
+          opacity: d.diff.removed ? [0] : [1],
+          y: [`${d.compLine * 1.2}em`],
+          timing: { duration: 1000, ease: easeExpInOut },
+        },
+        {
+          transform: ['translate(0)'],
+          timing: { delay: 500, duration: 2500, ease: easeExpOut },
         },
       ]}
       update={(d, i) => [
         {
-          textAttributes: {
-            opacity: 1,
-          },
+          opacity: 1,
+          y: `${d.compLine * 1.2}em`,
+          transform: 'translate(0)',
         },
       ]}
       leave={(d, i) => [
         {
-          textAttributes: {
-            opacity: 0,
-          },
+          opacity: 0,
         },
       ]}>
       {nodes => {
         return (
           <g>
-            {nodes
-              .filter(x => x.data.stepNo === stepNo)
-              .map(({ key, data: { diff }, state: { textAttributes } }) => {
-                return (
-                  <text key={key} style={{ font: '14px monospace' }} {...textAttributes}>
-                    {diff.value.split('\n').filter(l => !!l).map((l, i) => {
-                      return (
-                        <tspan key={i} x="0" dy="1.2em" xmlSpace="preserve">
-                          {l}
-                        </tspan>
-                      );
-                    })}
-                  </text>
-                );
-              })}
+            {nodes.filter(x => x.data.stepNo === stepNo).map(({ key, data: { diff }, state }) => {
+              return (
+                <text key={key} style={{ font: '14px monospace' }} {...state}>
+                  {diff.value.split('\n').filter(l => !!l).map((l, i) => {
+                    return (
+                      <tspan key={i} x="0" dy="1.2em" xmlSpace="preserve">
+                        {l}
+                      </tspan>
+                    );
+                  })}
+                </text>
+              );
+            })}
           </g>
         );
       }}
@@ -93,7 +91,6 @@ class Step extends React.Component {
         },
       ];
     }, []);
-
     return (
       <div>
         <ExampleCode stepNo={stepNo} items={items} />
