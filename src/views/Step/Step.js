@@ -102,12 +102,15 @@ class Step extends React.Component {
         <Paper>
           <ExampleCode view={[600, 250]} stepNo={stepNo} items={items} />
         </Paper>
-        <h2>Result:</h2>
-        <Paper>
-          <div style={{ margin: '20px' }}>
-            <Step />
-          </div>
-        </Paper>
+        {!Step.suppressResult &&
+          <div>
+            <h2>Result:</h2>
+            <Paper>
+              <div style={{ margin: '20px' }}>
+                <Step />
+              </div>
+            </Paper>
+          </div>}
       </div>
     );
   }
