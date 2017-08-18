@@ -7,7 +7,7 @@ const HelloWorld = () =>
     <span>world!</span>
   </p>;
 
-HelloWorld.title = 'Mutiple Element Children';
+HelloWorld.title = 'Multiple Element Children';
 HelloWorld.source = `const HelloWorld = () => (
   <p id="demo">
     <span>Hello</span>
