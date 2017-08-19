@@ -1,3 +1,5 @@
+import './ExampleCode.css';
+
 import React from 'react';
 import { easeSinOut, easeExpInOut } from 'd3-ease';
 import NodeGroup from 'resonance/NodeGroup';
@@ -58,7 +60,17 @@ const ExampleCode = ({ view, stepNo, items }) =>
               {nodes.filter(x => x.data.stepNo === stepNo).map(node => {
                 const { key, data: { diff }, state } = node;
                 return (
-                  <g key={key}>
+                  <g key={key} className={diff.added ? 'zoomable' : ''}>
+                    {node.bBox &&
+                      <rect
+                        transform={`translate(${node.bBox.x}, ${state.translateY + node.bBox.y})`}
+                        opacity={state.rectOpacity}
+                        stroke="red"
+                        strokeWidth="1px"
+                        fill="white"
+                        width={node.bBox.width}
+                        height={node.bBox.height}
+                      />}
                     <text
                       transform={`translate(${state.translateX}, ${state.translateY})`}
                       style={{ font: '14px monospace' }}
@@ -70,16 +82,6 @@ const ExampleCode = ({ view, stepNo, items }) =>
                         </tspan>
                       )}
                     </text>
-                    {node.bBox &&
-                      <rect
-                        transform={`translate(${node.bBox.x}, ${state.translateY + node.bBox.y})`}
-                        opacity={state.rectOpacity}
-                        stroke="red"
-                        strokeWidth="1px"
-                        fill="none"
-                        width={node.bBox.width}
-                        height={node.bBox.height}
-                      />}
                   </g>
                 );
               })}
