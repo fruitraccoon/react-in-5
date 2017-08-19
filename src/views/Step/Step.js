@@ -8,16 +8,27 @@ function sumDiffCounts(xs) {
 }
 
 class Step extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      lastStepNo: null,
+    };
+  }
+
   shouldComponentUpdate = (nextProps, nextState) => {
     // Only update if the stepNo changes
     return nextProps.stepNo !== this.props.stepNo;
   };
 
+  componentWillReceiveProps = nextProps => {
+    this.setState({ lastStepNo: this.props.stepNo });
+  };
+
   render() {
     const { slideshow, stepNo } = this.props;
+    const { lastStepNo } = this.state;
     const Step = slideshow.steps[stepNo];
-    let StepPrev = slideshow.steps[slideshow.getPrevStepNo(stepNo)];
-    if (StepPrev === Step) StepPrev = null;
+    const StepPrev = lastStepNo ? slideshow.steps[lastStepNo] : null;
 
     const diffs = diffLines((StepPrev && StepPrev.source) || '', Step.source);
 
