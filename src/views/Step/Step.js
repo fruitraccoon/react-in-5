@@ -41,20 +41,17 @@ class Step extends React.Component {
     const { lastStepNo } = this.state;
     const Step = slideshow.steps[stepNo];
     const StepPrev = lastStepNo ? slideshow.steps[lastStepNo] : null;
-
     const diffs = diffLines((StepPrev && StepPrev.source) || '', Step.source);
 
     const items = diffs.reduce((acc, diff, index) => {
       const oldAcc = acc.filter(x => !x.diff.added);
       const newAcc = acc.filter(x => !x.diff.removed);
       const lines = getLines(diff.value);
-      var analysedLines = lines.map(l => refractor.highlight(l, 'jsx'));
-      console.dir(analysedLines);
 
       return [
         ...acc,
         {
-          lines: analysedLines,
+          lines: lines.map(l => refractor.highlight(l, 'jsx')),
           diff,
           key: `${stepNo}-${index}`,
           stepNo,
