@@ -3,12 +3,9 @@ import './ExampleCode.css';
 import React from 'react';
 import { easeSinOut, easeExpInOut } from 'd3-ease';
 import NodeGroup from 'resonance/NodeGroup';
+import ExampleCodeText from './ExampleCodeText';
 
 const lineHeight = 17;
-
-function rTrim(s) {
-  return s.replace(/\s+$/, '');
-}
 
 const ExampleCode = ({ stepNo, items }) =>
   <div style={{ width: '90vw' }}>
@@ -56,7 +53,7 @@ const ExampleCode = ({ stepNo, items }) =>
         ]}>
         {nodes => {
           return (
-            <g>
+            <g style={{ font: '14px monospace' }}>
               {nodes.filter(x => x.data.stepNo === stepNo).map(node => {
                 const { key, data: { diff }, state } = node;
                 return (
@@ -71,17 +68,12 @@ const ExampleCode = ({ stepNo, items }) =>
                         width={node.bBox.width}
                         height={node.bBox.height}
                       />}
-                    <text
-                      transform={`translate(${state.translateX}, ${state.translateY})`}
-                      style={{ font: '14px monospace' }}
+                    <g
                       opacity={state.opacity}
+                      transform={`translate(${state.translateX}, ${state.translateY})`}
                       ref={e => (node.bBox = e && diff.added && e.getBBox())}>
-                      {rTrim(diff.value).split('\n').map(l => l || ' ').map((l, i) =>
-                        <tspan key={i} x="0" dy={lineHeight} xmlSpace="preserve">
-                          {l}
-                        </tspan>
-                      )}
-                    </text>
+                      <ExampleCodeText text={diff.value} lineHeight={lineHeight} />
+                    </g>
                   </g>
                 );
               })}
