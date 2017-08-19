@@ -1,6 +1,15 @@
+import './App.css';
+
 import React, { Component } from 'react';
 import Step from 'views/Step';
 import slideshow from 'views/slideshow';
+
+const NavArrow = ({ next }) =>
+  <div>
+    <svg viewBox="-5 0 70 100" transform={next ? 'rotate(180)' : ''}>
+      <path d="M 50,0 L 60,10 L 20,50 L 60,90 L 50,100 L 0,50 Z" />
+    </svg>
+  </div>;
 
 class App extends Component {
   constructor(props) {
@@ -19,13 +28,20 @@ class App extends Component {
   }
 
   handleKeyDown = e => {
-    const stepNo = this.state.stepNo;
     if (e.code === 'ArrowRight') {
-      this.setState({ stepNo: slideshow.getNextStepNo(stepNo) });
+      this.handleNext();
     }
     if (e.code === 'ArrowLeft') {
-      this.setState({ stepNo: slideshow.getPrevStepNo(stepNo) });
+      this.handlePrev();
     }
+  };
+
+  handleNext = () => {
+    this.setState({ stepNo: slideshow.getNextStepNo(this.state.stepNo) });
+  };
+
+  handlePrev = () => {
+    this.setState({ stepNo: slideshow.getPrevStepNo(this.state.stepNo) });
   };
 
   render() {
@@ -43,6 +59,24 @@ class App extends Component {
         <div style={{ padding: '0 5vw' }}>
           <Step slideshow={slideshow} stepNo={stepNo} />
         </div>
+        <button
+          onClick={this.handlePrev}
+          className={`nav-button ${slideshow.hasPrevStep(stepNo) ? 'nav-button-visible' : ''}`}
+          style={{
+            left: 0,
+            bottom: 0,
+          }}>
+          <NavArrow />
+        </button>
+        <button
+          onClick={this.handleNext}
+          className={`nav-button ${slideshow.hasNextStep(stepNo) ? 'nav-button-visible' : ''}`}
+          style={{
+            right: 0,
+            bottom: 0,
+          }}>
+          <NavArrow next />
+        </button>
       </div>
     );
   }

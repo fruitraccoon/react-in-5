@@ -36,12 +36,18 @@ const steps = [
   Step15,
 ];
 
+function getNextStepNo(stepNo) {
+  return stepNo < steps.length - 1 ? stepNo + 1 : stepNo;
+}
+
+function getPrevStepNo(stepNo) {
+  return stepNo > 0 ? stepNo - 1 : stepNo;
+}
+
 export default {
   steps,
-  getNextStepNo: stepNo => {
-    return stepNo < steps.length - 1 ? stepNo + 1 : stepNo;
-  },
-  getPrevStepNo: stepNo => {
-    return stepNo > 0 ? stepNo - 1 : stepNo;
-  },
+  getNextStepNo,
+  getPrevStepNo,
+  hasNextStep: stepNo => getNextStepNo(stepNo) !== stepNo,
+  hasPrevStep: stepNo => getPrevStepNo(stepNo) !== stepNo,
 };

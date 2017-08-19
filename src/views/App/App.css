@@ -1,0 +1,29 @@
+.nav-button {
+  position: fixed;
+  margin: 3em;
+  height: 8em;
+  width: 4em;
+  padding: 0;
+  border: none;
+  background: none;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.nav-button:focus {
+  outline-style: dotted;
+  outline-width: 1px;
+  outline-color: rgba(0, 0, 100, 0.3);
+}
+
+.nav-button-visible {
+  opacity: 1;
+}
+
+.nav-button > div {
+  transition: transform 0.25s ease-in-out;
+}
+
+.nav-button > div:hover {
+  transform: scale(1.1);
+}
