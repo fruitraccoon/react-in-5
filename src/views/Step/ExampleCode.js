@@ -55,7 +55,7 @@ const ExampleCode = ({ stepNo, items }) =>
           return (
             <g style={{ font: '14px monospace' }}>
               {nodes.filter(x => x.data.stepNo === stepNo).map(node => {
-                const { key, data: { diff }, state } = node;
+                const { key, data: { diff, lines }, state } = node;
                 return (
                   <g key={key} className={diff.added ? 'zoomable' : ''}>
                     {node.bBox &&
@@ -72,7 +72,7 @@ const ExampleCode = ({ stepNo, items }) =>
                       opacity={state.opacity}
                       transform={`translate(${state.translateX}, ${state.translateY})`}
                       ref={e => (node.bBox = e && diff.added && e.getBBox())}>
-                      <ExampleCodeText text={diff.value} lineHeight={lineHeight} />
+                      <ExampleCodeText lines={lines} lineHeight={lineHeight} />
                     </g>
                   </g>
                 );

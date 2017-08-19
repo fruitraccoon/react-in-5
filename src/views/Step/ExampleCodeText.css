@@ -1,0 +1,25 @@
+.token.comment {
+  fill: darkgray;
+  font-weight: bold;
+}
+
+.token.keyword {
+  fill: blue;
+}
+
+.token.string {
+  fill: maroon;
+  font-weight: bold;
+}
+
+.token.tag {
+  fill: green;
+}
+
+.token.attr-name {
+  fill: darkmagenta;
+}
+
+.token.attr-value {
+  fill: black;
+}

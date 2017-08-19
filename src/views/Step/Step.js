@@ -2,9 +2,21 @@ import React from 'react';
 import { diffLines } from 'diff';
 import Paper from './Paper';
 import ExampleCode from './ExampleCode';
+import refractor from 'refractor/core.js';
+import jsx from 'refractor/lang/jsx.js';
+
+refractor.register(jsx);
 
 function sumDiffCounts(xs) {
   return xs.reduce((a, x) => a + x.diff.count, 0);
+}
+
+function rTrim(s) {
+  return s.replace(/\s+$/, '');
+}
+
+function getLines(text) {
+  return rTrim(text).split('\n').map(l => l || ' ');
 }
 
 class Step extends React.Component {
@@ -35,9 +47,14 @@ class Step extends React.Component {
     const items = diffs.reduce((acc, diff, index) => {
       const oldAcc = acc.filter(x => !x.diff.added);
       const newAcc = acc.filter(x => !x.diff.removed);
+      const lines = getLines(diff.value);
+      var analysedLines = lines.map(l => refractor.highlight(l, 'jsx'));
+      console.dir(analysedLines);
+
       return [
         ...acc,
         {
+          lines: analysedLines,
           diff,
           key: `${stepNo}-${index}`,
           stepNo,
