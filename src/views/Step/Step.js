@@ -2,12 +2,11 @@ import React from 'react';
 import { diffLines } from 'diff';
 import { easeExpOut, easeExpInOut } from 'd3-ease';
 import NodeGroup from 'resonance/NodeGroup';
-import Surface from './Surface';
 import Paper from './Paper';
 
 const ExampleCode = ({ view, stepNo, items }) =>
-  <div style={{ width: '90vw', height: 'auto' }}>
-    <Surface view={[600, 250]}>
+  <div style={{ width: '90vw' }}>
+    <svg viewBox={`-5 -5 505 505`} style={{ maxHeight: '70vh' }}>
       <NodeGroup
         data={items}
         keyAccessor={d => d.key}
@@ -59,7 +58,7 @@ const ExampleCode = ({ view, stepNo, items }) =>
           );
         }}
       </NodeGroup>
-    </Surface>
+    </svg>
   </div>;
 
 function sumDiffCounts(xs) {
@@ -104,12 +103,14 @@ class Step extends React.Component {
         </Paper>
         {!Step.suppressResult &&
           <div>
-            <h2>Result:</h2>
-            <Paper>
-              <div style={{ margin: '20px' }}>
-                <Step />
-              </div>
-            </Paper>
+            <h2 style={{ marginBottom: '1.5em' }}>Result:</h2>
+            <div style={{ transform: 'scale(2)' }}>
+              <Paper>
+                <div style={{ margin: '20px' }}>
+                  <Step />
+                </div>
+              </Paper>
+            </div>
           </div>}
       </div>
     );
