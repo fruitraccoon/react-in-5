@@ -52,7 +52,7 @@ class Step extends React.Component {
           {Step.title}
         </h1>
         <Paper>
-          <ExampleCode view={[600, 250]} stepNo={stepNo} items={items} />
+          <ExampleCode stepNo={stepNo} items={items} />
         </Paper>
         {!Step.suppressResult &&
           <div>

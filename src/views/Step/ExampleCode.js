@@ -10,9 +10,9 @@ function rTrim(s) {
   return s.replace(/\s+$/, '');
 }
 
-const ExampleCode = ({ view, stepNo, items }) =>
+const ExampleCode = ({ stepNo, items }) =>
   <div style={{ width: '90vw' }}>
-    <svg viewBox={`-5 -5 505 505`} style={{ maxHeight: '70vh' }}>
+    <svg viewBox={`-5 -5 505 505`} style={{ maxHeight: '60vh' }}>
       <NodeGroup
         data={items}
         keyAccessor={d => d.key}
